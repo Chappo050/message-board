@@ -4,12 +4,12 @@ var router = express.Router();
 const messages = [
   {
     text: "Hi there!",
-    user: "Sai",
+    user: "Dog",
     added: new Date(),
   },
   {
     text: "Hello world!",
-    user: "Matthew",
+    user: "Cat",
     added: new Date(),
   },
 ];
@@ -21,6 +21,14 @@ router.get("/", function (req, res, next) {
 
 router.get("/new", function (req, res, next) {
   res.render("form", { createTitle: "Make a new message!" });
+});
+
+//handle form submit button
+router.post("/new", function (req, res, next) {
+  const messageText = req.body.messageText;
+  const nameText = req.body.nameText
+  messages.push({text: messageText, user: nameText, added: new Date()})
+  res.redirect('/')
 });
 
 module.exports = router;
